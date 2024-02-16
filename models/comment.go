@@ -35,3 +35,15 @@ func (p *Comment) BeforeUpdate(tx *gorm.DB) (err error) {
 	err = nil
 	return
 }
+
+func (p *Comment) BeforeDelete(tx *gorm.DB) (err error) {
+	_, errDelete := govalidator.ValidateStruct(p)
+
+	if errDelete != nil {
+		err = errDelete
+		return
+	}
+
+	err = nil
+	return
+}
